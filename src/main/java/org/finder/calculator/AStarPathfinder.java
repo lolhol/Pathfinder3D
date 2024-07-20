@@ -36,9 +36,15 @@ public class AStarPathfinder {
             for (int[] transformation : pickStyle.styleArray) {
                 Node transformed = best.getNodeWithTransformation(transformation);
 
-                //TODO: the "unrendered" is not being used.
-                if (closed.contains(transformed) || world.getBlockState(transformation) == BlockState.OBSTRUCTED)
+                if (closed.contains(transformed))
                     continue;
+                if (world.getBlockState(transformation) == BlockState.OBSTRUCTED) {
+                    closed.add(transformed); // we can close this node because it is is obstructed
+                    continue;
+                }
+                if (!world.isTranslationValid(best, transformed)) {
+                    continue;
+                }
 
                 transformed.initiateCosts(world, endNode);
                 open.add(transformed);
