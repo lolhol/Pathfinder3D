@@ -5,6 +5,7 @@ import org.finder.util.IOptionProvider;
 import org.finder.util.IStateProvider;
 import org.finder.util.IWorldProvider;
 import org.finder.util.Node;
+import org.finder.util.NodePickStyle;
 
 /**
  * @for This config is made for hypixel skyblock and Minecraft in general.
@@ -66,7 +67,29 @@ public class MinecraftHypixel implements IOptionProvider {
     }
 
     @Override
-    public boolean isTranslationValid(Node node, Node parent, IWorldProvider world) {
+    public boolean isTranslationValid(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle) {
         return isWalk(node, parent, world) || isJump(node, parent, world) || isFall(node, parent, world);
+    }
+
+    boolean isWalkSide(Node node, Node parent, IStateProvider world) {
+        return isWalk(node, parent, world) && isClearOnSides(node, parent, world);
+    }
+
+    public static boolean isClearOnSides(Node one, Node two, IStateProvider world) {
+        int changeX = two.x - one.x;
+        int changeZ = two.z - one.z;
+
+        return (world.getBlockState(one.getNodeWithTransformation(new int[] { 0, 0, changeZ })) == BlockState.OBSTRUCTED
+                &&
+                world.getBlockState(one.getNodeWithTransformation(new int[] { changeX, 0, 0 })) == BlockState.OBSTRUCTED
+                &&
+                world.getBlockState(one.getNodeWithTransformation(new int[] { 0, 1, changeZ })) == BlockState.OBSTRUCTED
+                &&
+                world.getBlockState(
+                        one.getNodeWithTransformation(new int[] { changeX, 1, 0 })) == BlockState.OBSTRUCTED);
+    }
+
+    boolean isSideBlock(Node node, Node parent) {
+        return node.distanceTo(parent) > 1;
     }
 }

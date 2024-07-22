@@ -2,6 +2,7 @@ package org.finder.util;
 
 import java.util.Stack;
 
+@SuppressWarnings("rawtypes")
 public class Node implements Comparable {
     public final int x, y, z;
     private double costH;
@@ -41,12 +42,13 @@ public class Node implements Comparable {
     }
 
     public double distanceTo(Node o) {
-        return Math.sqrt((o.x - this.x) * (o.x - this.x) + (o.y - this.y) * (o.y - this.y) + (o.z - this.z) * (o.z - this.z));
+        return Math.sqrt(
+                (o.x - this.x) * (o.x - this.x) + (o.y - this.y) * (o.y - this.y) + (o.z - this.z) * (o.z - this.z));
     }
 
     public Node getNodeWithTransformation(int[] transformationMatrix) {
         return new Node(this.x + transformationMatrix[0], this.y + transformationMatrix[1],
-            this.z + transformationMatrix[2], this);
+                this.z + transformationMatrix[2], this);
     }
 
     @Override

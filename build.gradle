@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation files('Pathfinder3D-1.0-SNAPSHOT.jar')
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

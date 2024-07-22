@@ -2,17 +2,17 @@ package org.finder.util;
 
 public enum NodePickStyle {
     /**
-     * @shape: *** *** ***
+     * @shape: _*_ _*_ _*_
      *         *** *_* ***
-     *         *** *** ***
+     *         _*_ _*_ _*_
      */
     CROSS(
             getCrossArr()),
 
     /**
-     * @shape: _*_ _*_ _*_
+     * @shape: *** *** ***
      *         *** *_* ***
-     *         _*_ _*_ _*_
+     *         *** *** ***
      */
     SIDES(
             getSidesArr()),
