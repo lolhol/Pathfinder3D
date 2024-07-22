@@ -1,4 +1,4 @@
-package org.finder.defaultConfigs;
+package org.finder.config;
 
 import org.finder.util.BlockState;
 import org.finder.util.IOptionProvider;
