@@ -1,5 +1,7 @@
 package org.finder.util;
 
+import java.util.Stack;
+
 public class Node implements Comparable {
     public final int x, y, z;
     private double costH;
@@ -56,5 +58,26 @@ public class Node implements Comparable {
     public boolean equals(Object o) {
         Node other = (Node) o;
         return other.x == this.x && other.y == this.y && other.z == this.z;
+    }
+
+    public Stack<Node> toStack() {
+        Node currentNode = this;
+        Stack<Node> returnStack = new Stack<>();
+        while (currentNode != null) {
+            returnStack.push(currentNode);
+            currentNode = currentNode.parent;
+        }
+
+        return returnStack;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ", " + this.z + ")";
+    }
+
+    @Override
+    public int hashCode() {
+        return (this.y + this.z * 31) * 31 + this.x;
     }
 }
