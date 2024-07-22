@@ -1,6 +1,7 @@
 package org.finder.calculator;
 
 import org.finder.util.BlockState;
+import org.finder.util.IStateProvider;
 import org.finder.util.IWorldProvider;
 import org.finder.util.Node;
 import org.finder.util.NodePickStyle;
@@ -35,7 +36,7 @@ public class AStarPathfinder {
                 if (closed.contains(transformed) || openHash.contains(transformed))
                     continue;
 
-                if (!world.isTranslationValid(transformed, best)) {
+                if (!world.isTranslationValid(transformed, best, world)) {
                     continue;
                 }
 

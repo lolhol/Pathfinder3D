@@ -37,7 +37,7 @@ public class Node implements Comparable {
     public void initiateCosts(IWorldProvider world, Node endGoal) {
         this.costH = endGoal.distanceTo(this);
         this.costP = parent != null ? parent.costP + this.distanceTo(parent) : 0;
-        this.costTotal = costH + costP + world.addToTotalCost(this);
+        this.costTotal = costH + costP + world.addToTotalCost(this, world);
     }
 
     public double distanceTo(Node o) {
