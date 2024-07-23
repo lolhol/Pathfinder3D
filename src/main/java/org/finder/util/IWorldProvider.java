@@ -1,3 +1,7 @@
 package org.finder.util;
 
-public interface IWorldProvider extends IStateProvider, IOptionProvider {}
+/**
+ * @use an adaptation for both the IStateProvider and IOptionProvider.
+ */
+public interface IWorldProvider extends IStateProvider, IOptionProvider {
+}
