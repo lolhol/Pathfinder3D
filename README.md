@@ -1,0 +1,1 @@
+Please note that this pathfinding code is BY NO MEANS fully optimized. Changed xan be done to increase the preformance of the finder gradually at large ranges. At the moment the pathfinder does not feature them since I really dont see the point in making them. Create pull requests by all means.
