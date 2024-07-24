@@ -36,8 +36,8 @@ public class AStarPathfinder {
                 if (closed.contains(transformed) || openHash.contains(transformed))
                     continue;
 
-                if (!world.isTranslationValid(transformed, best, world, pickStyle)
-                        || world.getBlockState(transformed) == BlockState.DOES_NOT_EXIST) {
+                if (world.getBlockState(transformed) == BlockState.DOES_NOT_EXIST
+                        || !world.isTranslationValid(transformed, best, world, pickStyle)) {
                     continue;
                 }
 

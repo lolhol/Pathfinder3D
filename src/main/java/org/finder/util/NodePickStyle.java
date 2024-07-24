@@ -38,11 +38,13 @@ public enum NodePickStyle {
     }
 
     static int[][] getSidesArr() {
-        int[][] returnInts = new int[27][3];
+        int[][] returnInts = new int[25][3];
         int i = 0;
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
+                    if (x == 0 && y == 0 && z == 0)
+                        continue;
                     returnInts[i] = new int[] { x, y, z };
                     i++;
                 }
@@ -53,11 +55,13 @@ public enum NodePickStyle {
     }
 
     static int[][] getCrossArr() {
-        int[][] returnInts = new int[6][3];
+        int[][] returnInts = new int[12][3];
         int i = 0;
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
+                    if (x == 0 && y == 0 && z == 0)
+                        continue;
                     if ((z == 0 && x != 0) || (z != 0 && x == 0)) {
                         returnInts[i] = new int[] { x, y, z };
                         i++;
@@ -74,6 +78,8 @@ public enum NodePickStyle {
         int i = 0;
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
+                if (x == 0 && z == 0)
+                    continue;
                 if ((z == 0 && x != 0) || (z != 0 && x == 0)) {
                     returnInts[i] = new int[] { x, 0, z };
                     i++;
@@ -85,11 +91,12 @@ public enum NodePickStyle {
     }
 
     static int[][] get2DSidesArr() {
-        int[][] returnInts = new int[4][3];
+        int[][] returnInts = new int[8][3];
         int i = 0;
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
-
+                if (x == 0 && z == 0)
+                    continue;
                 returnInts[i] = new int[] { x, 0, z };
                 i++;
             }
