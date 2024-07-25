@@ -5,6 +5,7 @@ import org.finder.util.IStateProvider;
 import org.finder.util.IWorldProvider;
 import org.finder.util.Node;
 import org.finder.util.NodePickStyle;
+import org.finder.util.Transition;
 
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -40,11 +41,11 @@ public class AStarPathfinder {
                     continue;
                 }
 
-                String transitionType = world.getTransitionType(transformed, best, world, pickStyle);
-                if (transitionType.equals("NONE"))
+                Transition transitionType = world.getTransition(transformed, best, world, pickStyle);
+                if (transitionType.transitionType.equals("NONE"))
                     continue;
 
-                transformed.initiateCosts(world, endNode, transitionType);
+                transformed.initiateCosts(world, endNode, transitionType.cost);
                 open.add(transformed);
                 openHash.add(transformed);
             }

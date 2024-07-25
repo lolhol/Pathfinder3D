@@ -6,13 +6,14 @@ import org.finder.util.IStateProvider;
 import org.finder.util.IWorldProvider;
 import org.finder.util.Node;
 import org.finder.util.NodePickStyle;
+import org.finder.util.Transition;
 
 /**
  * @for This config is made for hypixel skyblock and Minecraft in general.
  * @note ONLY WORKS FOR CROSS ATM!
  */
 public class MinecraftHypixel implements IOptionProvider {
-    public double addToTotalCost(Node node, Node parent, IWorldProvider world, String transitionType) {
+    public double addToTotalCost(Node node, Node parent, IWorldProvider world) {
         int[] nodePosition = new int[] { node.x, node.y + 2, node.z };
         double totalCost = 0;
 
@@ -66,10 +67,15 @@ public class MinecraftHypixel implements IOptionProvider {
                 && world.getBlockState(block2AboveNode) == BlockState.UNOBSTRUCTED);
     }
 
+    /**
+     * @WARNING THIS DOES NOT WORK ATM!
+     */
     @Override
-    public String getTransitionType(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle) {
-        return isWalk(node, parent, world) || isJump(node, parent, world) || isFall(node, parent, world) ? "WALK"
-                : "NONE";
+    public Transition getTransition(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle) {
+
+        double extraCost = addToTotalCost(node, parent, world);
+
+        return new Transition(null, extraCost);
     }
 
     boolean isWalkSide(Node node, Node parent, IStateProvider world) {

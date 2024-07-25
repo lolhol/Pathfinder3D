@@ -18,17 +18,5 @@ public interface IOptionProvider {
      * 
      * @note2 This will be passed inside of the "addToTotalCost" function
      */
-    String getTransitionType(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle);
-
-    /**
-     * @param node  Node currently being considered
-     * @param world The interface to get the world state.
-     * @return The cost to add to Total Cost.
-     * @note Sometimes you want to give more emphasis on some actions than others.
-     *       For example, if you are walking through a forest, you probably want to
-     *       go through the most clear path so not to bump into trees so often. The
-     *       higher the return value, the less likely the pathfinder is to pick this
-     *       block.
-     */
-    double addToTotalCost(Node node, Node parent, IWorldProvider world, String transitionType);
+    Transition getTransition(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle);
 }
