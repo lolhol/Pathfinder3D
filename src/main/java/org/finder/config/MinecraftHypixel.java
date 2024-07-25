@@ -12,7 +12,7 @@ import org.finder.util.NodePickStyle;
  * @note ONLY WORKS FOR CROSS ATM!
  */
 public class MinecraftHypixel implements IOptionProvider {
-    public double addToTotalCost(Node node, IWorldProvider world, String transitionType) {
+    public double addToTotalCost(Node node, Node parent, IWorldProvider world, String transitionType) {
         int[] nodePosition = new int[] { node.x, node.y + 2, node.z };
         double totalCost = 0;
 

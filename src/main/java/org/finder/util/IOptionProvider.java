@@ -30,5 +30,5 @@ public interface IOptionProvider {
      *       higher the return value, the less likely the pathfinder is to pick this
      *       block.
      */
-    double addToTotalCost(Node node, IWorldProvider world, String transitionType);
+    double addToTotalCost(Node node, Node parent, IWorldProvider world, String transitionType);
 }
