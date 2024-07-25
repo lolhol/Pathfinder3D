@@ -43,7 +43,7 @@ public enum NodePickStyle {
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    if (x == 0 && y == 0 && z == 0)
+                    if (x == 0 && z == 0)
                         continue;
                     returnInts[i] = new int[] { x, y, z };
                     i++;
@@ -60,7 +60,7 @@ public enum NodePickStyle {
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    if (x == 0 && y == 0 && z == 0)
+                    if (x == 0 && z == 0)
                         continue;
                     if ((z == 0 && x != 0) || (z != 0 && x == 0)) {
                         returnInts[i] = new int[] { x, y, z };
