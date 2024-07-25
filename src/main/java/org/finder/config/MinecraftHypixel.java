@@ -12,7 +12,7 @@ import org.finder.util.NodePickStyle;
  * @note ONLY WORKS FOR CROSS ATM!
  */
 public class MinecraftHypixel implements IOptionProvider {
-    public double addToTotalCost(Node node, IWorldProvider world) {
+    public double addToTotalCost(Node node, IWorldProvider world, String transitionType) {
         int[] nodePosition = new int[] { node.x, node.y + 2, node.z };
         double totalCost = 0;
 
@@ -67,8 +67,9 @@ public class MinecraftHypixel implements IOptionProvider {
     }
 
     @Override
-    public boolean isTranslationValid(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle) {
-        return isWalk(node, parent, world) || isJump(node, parent, world) || isFall(node, parent, world);
+    public String getTransitionType(Node node, Node parent, IWorldProvider world, NodePickStyle pickStyle) {
+        return isWalk(node, parent, world) || isJump(node, parent, world) || isFall(node, parent, world) ? "WALK"
+                : "NONE";
     }
 
     boolean isWalkSide(Node node, Node parent, IStateProvider world) {

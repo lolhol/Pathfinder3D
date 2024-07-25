@@ -36,12 +36,15 @@ public class AStarPathfinder {
                 if (closed.contains(transformed) || openHash.contains(transformed))
                     continue;
 
-                if (world.getBlockState(transformed) == BlockState.DOES_NOT_EXIST
-                        || !world.isTranslationValid(transformed, best, world, pickStyle)) {
+                if (world.getBlockState(transformed) == BlockState.DOES_NOT_EXIST) {
                     continue;
                 }
 
-                transformed.initiateCosts(world, endNode);
+                String transitionType = world.getTransitionType(transformed, best, world, pickStyle);
+                if (transitionType.equals("NONE"))
+                    continue;
+
+                transformed.initiateCosts(world, endNode, transitionType);
                 open.add(transformed);
                 openHash.add(transformed);
             }
