@@ -1,26 +1,19 @@
 package org.finder.util;
 
+import java.util.HashSet;
 import java.util.Stack;
 
 @SuppressWarnings("rawtypes")
 public class Node implements Comparable {
     public final int x, y, z;
-    private double costH;
-    private double costP;
-    private double costTotal;
-    private final Node parent;
+    double costH;
+    double costP;
+    double costTotal;
+    final Node parent;
+    HashSet<Node> broken;
 
     public Node(int x, int y, int z, Node parent) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-
-        this.costH = 0;
-        this.costP = 0;
-
-        this.costTotal = costH + costP;
-
-        this.parent = parent;
+        this(x, y, z, 0, 0, parent);
     }
 
     public Node(int x, int y, int z, double costH, double costP, Node parent) {
@@ -33,6 +26,7 @@ public class Node implements Comparable {
         this.costTotal = costH + costP;
 
         this.parent = parent;
+        this.broken = parent == null ? new HashSet<>() : parent.broken;
     }
 
     public void initiateCosts(IWorldProvider world, Node endGoal, double extra) {
@@ -41,14 +35,18 @@ public class Node implements Comparable {
         this.costTotal = costH + costP + extra;
     }
 
+    public void addToBroken(HashSet<Node> additionalBroken) {
+        this.broken.addAll(additionalBroken);
+    }
+
     public double distanceTo(Node o) {
         return Math.sqrt(
-                (o.x - this.x) * (o.x - this.x) + (o.y - this.y) * (o.y - this.y) + (o.z - this.z) * (o.z - this.z));
+            (o.x - this.x) * (o.x - this.x) + (o.y - this.y) * (o.y - this.y) + (o.z - this.z) * (o.z - this.z));
     }
 
     public Node getNodeWithTransformation(int[] transformationMatrix) {
         return new Node(this.x + transformationMatrix[0], this.y + transformationMatrix[1],
-                this.z + transformationMatrix[2], this);
+            this.z + transformationMatrix[2], this);
     }
 
     @Override
