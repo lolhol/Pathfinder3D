@@ -35,6 +35,10 @@ public class Node implements Comparable {
         this.costTotal = costH + costP + extra;
     }
 
+    public HashSet<Node> getBroken() {
+        return this.broken;
+    }
+
     public void addToBroken(HashSet<Node> additionalBroken) {
         this.broken.addAll(additionalBroken);
     }
