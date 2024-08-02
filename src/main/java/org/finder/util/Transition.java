@@ -4,16 +4,14 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public class Transition {
-    public final String transitionType;
     public final double cost;
     public final HashSet<Node> toBreak;
 
-    public Transition(String transitionType, double cost) {
-        this(transitionType, cost, null);
+    public Transition(double cost) {
+        this(cost, null);
     }
 
-    public Transition(String transitionType, double cost, HashSet<Node> toBreak) {
-        this.transitionType = transitionType;
+    public Transition(double cost, HashSet<Node> toBreak) {
         this.cost = cost;
         this.toBreak = toBreak;
     }

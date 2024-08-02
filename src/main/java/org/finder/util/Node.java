@@ -10,7 +10,7 @@ public class Node implements Comparable {
     double costP;
     double costTotal;
     final Node parent;
-    HashSet<Node> broken = new HashSet<>();
+    final HashSet<Node> broken = new HashSet<>();
 
     public Node(int x, int y, int z, Node parent) {
         this(x, y, z, 0, 0, parent);
@@ -26,9 +26,6 @@ public class Node implements Comparable {
         this.costTotal = costH + costP;
 
         this.parent = parent;
-        if (parent != null) {
-            this.broken.addAll(parent.getBroken());
-        }
     }
 
     public void initiateCosts(IWorldProvider world, Node endGoal, double extra) {
@@ -41,8 +38,31 @@ public class Node implements Comparable {
         return this.broken;
     }
 
+    /**
+     * @param node the node to check if is broken
+     * @return true if node is broken in the local storage false if it is not
+     * @note a bit of a slower method of checking ik but if we store the data of all
+     *       of the other nodes, the size gets 2x every new node
+     */
+    public boolean isNodeBroken(Node node) {
+        Node currentNode = this.parent;
+        while (currentNode != null) {
+            if (currentNode.getBroken().contains(currentNode)) {
+                return true;
+            }
+
+            currentNode = currentNode.parent;
+        }
+
+        return false;
+    }
+
     public void addToBroken(HashSet<Node> additionalBroken) {
         this.broken.addAll(additionalBroken);
+    }
+
+    public void addToBroken(Node node) {
+        this.broken.add(node);
     }
 
     public double distanceTo(Node o) {
